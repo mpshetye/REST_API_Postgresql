@@ -1,3 +1,4 @@
+require('dotenv').config();
 const express = require("express");
 const sequelize = require("./config/database");
 
@@ -9,18 +10,15 @@ const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-
 //database connection
 sequelize
-  .authenticate()
+  .authenticate() //to test if the connection is OK
   .then(() => {
-    const port = process.env.PORT || 80;
-    app.listen(port, () =>
-      console.log(`server started...`));
+    const port = process.env.PORT || 8000;
+    app.listen(port, () => console.log(`server started...`));
     console.log("Connection has been established successfully.");
   })
   .catch((error) => console.error("Unable to connect to the database:", error));
-
 
 //routes
 app.get("/", (req, res) => {
