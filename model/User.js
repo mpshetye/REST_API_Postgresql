@@ -1,5 +1,5 @@
 const Sequelize = require("sequelize");
-const { DataTypes } = require("sequelize")
+const { DataTypes } = require("sequelize");
 const db = require("../config/database");
 
 //Model
@@ -25,20 +25,21 @@ const Playground = db.define(
       type: DataTypes.STRING(255),
       allowNull: false,
     },
-    createdAt:{
+    createdAt: {
       type: DataTypes.DATE,
-      allowNull: false
+      allowNull: false,
     },
-    updatedAt:{
+    updatedAt: {
       type: DataTypes.DATE,
-      allowNull: false
-    }
+      allowNull: false,
+    },
   },
   {
     freezeTableName: true, //stop the auto-pluralization performed by Sequelize using the freezeTableName: true option. This way, Sequelize will infer the table name to be equal to the model name, without any modifications
   }
 );
 
+//model.sync() -->creates a table if it doesn't exist (and does nothing if it already exits)
 Playground.sync().then(() => {
   console.log("table created");
 });
